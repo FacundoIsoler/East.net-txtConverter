@@ -1,0 +1,44 @@
+/* src/components/navbar/Navbar.css */
+
+.navbar {
+    background-color: #252525;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 200px; /* Ajusta el tamaño según tus necesidades */
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding-right: 15px;
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    color:  #186e6e;
+}

@@ -1,0 +1,100 @@
+.table {
+    border-collapse: collapse;
+}
+
+/* CSS body */
+.body {
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 10%;
+    min-width: 45rem;
+    font-size: 10;
+    border: .0625rem;
+}
+
+.header {
+    width: 99%;
+    height: 20%;
+    padding: .1875rem;
+    margin: 0.5rem;
+    background-color: white;
+    display: flex;
+    text-align: center;
+}
+
+.logo {
+    width: 48%;
+    margin: 0;
+}
+
+.nOrden {
+    padding: 1rem;
+}
+
+.company {
+    width: auto;
+    height: auto;
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.fieldsetContainer {
+    width: 41.25rem;
+    border-radius: 4%;
+    margin-bottom: 4rem;
+}
+
+.fieldsetContainer2 {
+    width: 41.25rem;
+    border-radius: 4%;
+}
+
+.odd th,
+.odd td {
+    background: #eee;
+    border: .0625rem solid #000;
+}
+
+.even th,
+.even td {
+    background: white;
+    border: 1px solid #000;
+}
+
+/* CSS client  */
+
+.client {
+    width: 90%;
+    height: 20%;
+    padding: .625rem;
+    margin: O;
+}
+
+.details {
+    width: 90%;
+    height: 20%;
+    padding: .625rem;
+    border: .0625rem;
+    margin: O;
+    background-color: white;
+    border-radius: 10%;
+}
+
+/* CSS DETALLES PRODUCTOS */
+
+.total {
+    text-align: right;
+    padding-right: 3rem;
+}
+
+.state {
+    padding: 0.8rem;
+    color: red;
+    text-align: center;
+    font-size: x-large;
+}
+
+.backButton{
+    margin:10px;
+}
+

@@ -1,0 +1,60 @@
+/* src/App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  flex: 0 0 auto;
+  position: fixed;
+  width: 100%;
+}
+
+.App-main {
+  flex: 1;
+  margin-top: 4rem;
+}
+
+.App-footer {
+  flex: 0 0 auto;
+}
+
+/* Ajusta el área de contenido principal para tener en cuenta el pie de página fijo */
+.App-main {
+  flex-grow: 1;
+}
+
+/* Opcional: Agrega un margen en la parte inferior del contenido principal */
+main {
+  margin-bottom: 50px;
+  /* Ajusta el valor según sea necesario */
+}
+
+/* Ajusta todos los botones en la aplicación */
+button {
+  padding: 10px;
+  background-color: #27afaf;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: 30%;
+  /* Ajusta el ancho según sea necesario */
+}
+
+button:hover {
+  background-color: #186e6e;
+}
+
+/* Ajusta la apariencia de los elementos en pantallas más pequeñas */
+@media screen and (max-width: 600px) {
+  .App-main {
+    margin-top: 3rem;
+  }
+
+  main {
+    margin-bottom: 30px;
+  }
+}

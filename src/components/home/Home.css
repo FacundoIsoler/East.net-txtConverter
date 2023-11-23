@@ -1,0 +1,23 @@
+/* src/components/home/Home.css */
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #555;
+    margin-bottom: 6.25rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+button:hover {
+    background-color: #45a049;
+}
