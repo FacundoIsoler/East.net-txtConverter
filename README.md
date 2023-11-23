@@ -1,67 +1,71 @@
-Tango Software App
+# Tango Software App
+
 Esta es una aplicación web simple construida con React para gestionar datos relacionados con el software Tango. La aplicación incluye funcionalidades para mostrar una tabla de datos, ver detalles de un pago y descargar archivos de texto (.txt) individualmente o en un archivo ZIP.
 
-Características
-Tabla de Datos: Muestra una tabla con información relevante, como la fecha, el número de factura, el cliente, el nombre, el teléfono y el pago total.
+## Características
 
-Detalles del Pago: Permite ver detalles específicos de un pago haciendo clic en el botón "Ver" en la tabla.
+- **Tabla de Datos**: Muestra una tabla con información relevante, como la fecha, el número de factura, el cliente, el nombre, el teléfono y el pago total.
 
-Descarga de Archivos de Texto: Permite descargar archivos de texto (.txt) individuales haciendo clic en el enlace "Descargar TXT" en la tabla.
+- **Detalles del Pago**: Permite ver detalles específicos de un pago haciendo clic en el botón "Ver" en la tabla.
 
-Descarga de Archivo ZIP: Permite descargar un archivo ZIP que contiene todos los archivos de texto (.txt) de la tabla haciendo clic en el botón "Descargar ZIP".
+- **Descarga de Archivos de Texto**: Permite descargar archivos de texto (.txt) individuales haciendo clic en el enlace "Descargar TXT" en la tabla.
 
-Estructura del Proyecto
-src/components: Contiene los componentes de la aplicación.
+- **Descarga de Archivo ZIP**: Permite descargar un archivo ZIP que contiene todos los archivos de texto (.txt) de la tabla haciendo clic en el botón "Descargar ZIP".
 
-home: Contiene el componente Home para la página de inicio.
+## Estructura del Proyecto
 
-navbar: Contiene el componente Navbar para la barra de navegación.
+- **`src/components`**: Contiene los componentes de la aplicación.
 
-TangoSoftware: Contiene los componentes específicos del software Tango.
+  - **`home`**: Contiene el componente `Home` para la página de inicio.
+  
+  - **`navbar`**: Contiene el componente `Navbar` para la barra de navegación.
 
-data: Contiene el componente DataTango para mostrar datos relacionados con Tango.
+  - **`TangoSoftware`**: Contiene los componentes específicos del software Tango.
 
-proofOfPayment: Contiene el componente ProofOfPaymentTango para mostrar detalles del pago.
+    - **`data`**: Contiene el componente `DataTango` para mostrar datos relacionados con Tango.
 
-table: Contiene los componentes relacionados con la tabla.
+    - **`proofOfPayment`**: Contiene el componente `ProofOfPaymentTango` para mostrar detalles del pago.
 
-tableHeader: Contiene el componente TableHeader para el encabezado de la tabla.
+    - **`table`**: Contiene los componentes relacionados con la tabla.
 
-tableContent: Contiene el componente TableContent para el contenido de la tabla.
+      - **`tableHeader`**: Contiene el componente `TableHeader` para el encabezado de la tabla.
 
-tableTango: Contiene el componente TableTango como la tabla principal.
+      - **`tableContent`**: Contiene el componente `TableContent` para el contenido de la tabla.
 
-src/actions: Contiene los archivos de acciones para la gestión del estado.
+      - **`tableTango`**: Contiene el componente `TableTango` como la tabla principal.
 
-src/file: Contiene el archivo File.js para la lógica de descarga de archivos.
+- **`src/actions`**: Contiene los archivos de acciones para la gestión del estado.
 
-src/reducers: Contiene el archivo reducer.js para la gestión del estado mediante Redux.
+- **`src/file`**: Contiene el archivo `File.js` para la lógica de descarga de archivos.
 
-src/App.js: El archivo principal que define las rutas y la estructura general de la aplicación.
+- **`src/reducers`**: Contiene el archivo `reducer.js` para la gestión del estado mediante Redux.
 
-src/App.css: Estilo principal de la aplicación.
+- **`src/App.js`**: El archivo principal que define las rutas y la estructura general de la aplicación.
 
-Instalación y Ejecución
-Clona el repositorio:
+- **`src/App.css`**: Estilo principal de la aplicación.
 
-bash
-Copy code
-git clone https://github.com/tu-usuario/tango-software-app.git
-Navega al directorio del proyecto:
+## Instalación y Ejecución
 
-bash
-Copy code
-cd tango-software-app
-Instala las dependencias:
+1. Clona el repositorio:
 
-bash
-Copy code
-npm install
-Inicia la aplicación:
+   ```bash
+   git clone https://github.com/tu-usuario/tango-software-app.git
 
-bash
-Copy code
-npm start
-La aplicación estará disponible en http://localhost:3000.
+2. Navega al directorio del proyecto:
 
-¡Disfruta usando la aplicación Tango Software!
+   ```bash
+   cd tango-software-app
+
+3. Instala las dependencias:
+
+   ```bash
+   npm install
+
+4. Inicia la aplicación:
+
+   ```bash
+   npm start
+
+## La aplicación estará disponible en http://localhost:3000.
+
+# ¡Disfruta usando la aplicación Tango Software!
