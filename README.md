@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+Tango Software App
+Esta es una aplicación web simple construida con React para gestionar datos relacionados con el software Tango. La aplicación incluye funcionalidades para mostrar una tabla de datos, ver detalles de un pago y descargar archivos de texto (.txt) individualmente o en un archivo ZIP.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Características
+Tabla de Datos: Muestra una tabla con información relevante, como la fecha, el número de factura, el cliente, el nombre, el teléfono y el pago total.
 
-## Available Scripts
+Detalles del Pago: Permite ver detalles específicos de un pago haciendo clic en el botón "Ver" en la tabla.
 
-In the project directory, you can run:
+Descarga de Archivos de Texto: Permite descargar archivos de texto (.txt) individuales haciendo clic en el enlace "Descargar TXT" en la tabla.
 
-### `npm start`
+Descarga de Archivo ZIP: Permite descargar un archivo ZIP que contiene todos los archivos de texto (.txt) de la tabla haciendo clic en el botón "Descargar ZIP".
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Estructura del Proyecto
+src/components: Contiene los componentes de la aplicación.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+home: Contiene el componente Home para la página de inicio.
 
-### `npm test`
+navbar: Contiene el componente Navbar para la barra de navegación.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+TangoSoftware: Contiene los componentes específicos del software Tango.
 
-### `npm run build`
+data: Contiene el componente DataTango para mostrar datos relacionados con Tango.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+proofOfPayment: Contiene el componente ProofOfPaymentTango para mostrar detalles del pago.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+table: Contiene los componentes relacionados con la tabla.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+tableHeader: Contiene el componente TableHeader para el encabezado de la tabla.
 
-### `npm run eject`
+tableContent: Contiene el componente TableContent para el contenido de la tabla.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+tableTango: Contiene el componente TableTango como la tabla principal.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+src/actions: Contiene los archivos de acciones para la gestión del estado.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+src/file: Contiene el archivo File.js para la lógica de descarga de archivos.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+src/reducers: Contiene el archivo reducer.js para la gestión del estado mediante Redux.
 
-## Learn More
+src/App.js: El archivo principal que define las rutas y la estructura general de la aplicación.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+src/App.css: Estilo principal de la aplicación.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Instalación y Ejecución
+Clona el repositorio:
 
-### Code Splitting
+bash
+Copy code
+git clone https://github.com/tu-usuario/tango-software-app.git
+Navega al directorio del proyecto:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+bash
+Copy code
+cd tango-software-app
+Instala las dependencias:
 
-### Analyzing the Bundle Size
+bash
+Copy code
+npm install
+Inicia la aplicación:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+bash
+Copy code
+npm start
+La aplicación estará disponible en http://localhost:3000.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+¡Disfruta usando la aplicación Tango Software!
