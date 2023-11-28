@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { getDetail } from '../../../actions/actions';
 import { saveTangoData } from '../../../actions/tangoActions';
 import './DataTango.css';
+import nominaDeClientes from './nominaDeClientes';
+
 
 // Componente para manejar y guardar datos de Tango
 const DataTango = ({ saveTangoData }) => {
@@ -15,6 +17,8 @@ const DataTango = ({ saveTangoData }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const tangoData = useSelector((state) => state.tangoData);
+
+    let json = ""
 
     // Manejar cambios en el área de entrada de texto
     const handleInputChange = (event) => {
@@ -50,6 +54,25 @@ const DataTango = ({ saveTangoData }) => {
         dispatch(getDetail(tangoData));
     };
 
+
+    const handleJson = () => {
+        // Obtener la cadena JSON del objeto
+        const jsonString = JSON.stringify(nominaDeClientes.resultData.list);
+
+        // Establecer la cadena JSON en el textarea
+        json = nominaDeClientes.resultData.list
+        localStorage.setItem('tangoData', jsonString);
+        setShowSavedMessage(true);
+
+
+        // Redirigir a la página de gestión de Tango después de 2 segundos
+        setTimeout(() => {
+            setShowSavedMessage(false);
+            navigate('/data/tango/clients');
+        }, 2000);
+        console.log(json, "DataTango")
+    }
+
     return (
         <div className="data-container">
             <h1>Data</h1>
@@ -77,6 +100,12 @@ const DataTango = ({ saveTangoData }) => {
                     className="file-input"
                 />
             </div>
+            <button
+                onClick={handleJson}
+            >
+                JSON PRUEBA
+            </button>
+
             <div>
                 <button onClick={handleSaveJson}>Guardar JSON</button>
             </div>
@@ -84,6 +113,7 @@ const DataTango = ({ saveTangoData }) => {
                 <div className="success-message">
                     JSON guardado con éxito. Redireccionando a la página de gestión de Tango Software...
                 </div>
+
             )}
         </div>
     );

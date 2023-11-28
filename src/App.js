@@ -8,6 +8,7 @@ import ProofOfPayment from './components/TangoSoftware/proofOfPayment/ProofOfPay
 import TableTango from './components/TangoSoftware/table/tableTango/TableTango';
 import Footer from './components/footer/Footer';
 import './App.css';
+import Clients from './components/TangoSoftware/data/clients/Clients';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/data/tango" element={<DataTango />} />
+            <Route path="/data/tango/clients" element={<Clients />} />
             <Route path="/proofOfPaymentTango" element={<ProofOfPayment />} />
             <Route path="/tableTango" element={<TableTango />} />
           </Routes>
