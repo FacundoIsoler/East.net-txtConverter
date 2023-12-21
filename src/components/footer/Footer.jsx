@@ -19,7 +19,7 @@ const Footer = () => {
 
   return (
     <div className={`Footer ${isVisible ? 'visible' : ''}`}>
-      <p>&copy; 2023 Tu Empresa. Todos los derechos reservados.</p>
+      <p>&copy; 2023 FacuTech. Todos los derechos reservados.</p>
     </div>
   );
 };
