@@ -5,12 +5,12 @@ import './TableTango.css';
 
 const TableTango = () => {
     return (
-        <div className="table-tango">
+        <main className="table-tango">
             <h1>TableTango</h1>
             <table>
                 <TableHeader />
             </table>
-        </div>
+        </main>
     );
 };
 

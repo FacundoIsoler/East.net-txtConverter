@@ -45,8 +45,53 @@ const TableContent = () => {
                     const telephoneNumber = item.Customer.MobilePhoneNumber;
                     const customerID = item.Customer.CustomerID;
                     const nOrden = item.OrderID;
-                    const date = item.Date;
+                    const date = item.Date.slice(0, 10);
+
+
+                    //File details 
+
+                    const formattedDate = date.replace(/-/g, ''); // Eliminar guiones de la fecha
+                    const dateYear = Number(formattedDate.slice(2, 4));
+                    const dateMonth = Number(formattedDate.slice(4, 6));
+                    const dateDay = Number(formattedDate.slice(6, 8));
+                    const formattedDate2 = [dateYear.toString().padStart(2, '0'), dateMonth.toString().padStart(2, '0'), dateDay.toString().padStart(2, '0')];
+
+                    const dept = Number([dateMonth.toString().padStart(2, '0'), dateYear.toString().padStart(2, '0')].join(""))
+
                     const paidTotal = item.PaidTotal;
+                    const it = item.OrderItems.map((p) => {
+                        const product = p.Description;
+                        // Dividir el producto en palabras y tomar las dos primeras
+                        const firstTwoWords = product.split(' ').slice(0, 2).join(' ');
+                        return firstTwoWords;
+                    });
+                    // Crear un array con las cadenas formateadas para cada elemento de it
+                    const formattedProducts = it.map((product) => product);
+
+                    // Unir todas las cadenas formateadas en una sola cadena
+                    let concatenatedProducts = formattedProducts.join(' ');
+                    // Limitar la longitud a 25 caracteres
+                    if (concatenatedProducts.length > 25) {
+                        concatenatedProducts = concatenatedProducts.slice(0, 25);
+                    }
+
+                    // Verificar que concatenatedProducts cumple con los requisitos de formato
+                    const isValidFormat = /^[A-Z0-9]+$/.test(concatenatedProducts);
+
+                    if (isValidFormat) {
+                        // El formato es válido, puedes continuar con el código
+                        console.log('El formato es válido:', concatenatedProducts);
+                    } else {
+                        // El formato no es válido, reemplazar caracteres no válidos
+                        console.error('Error: El formato no es válido, se procedderá con el cambio de caracteres no válidos por uno que si lo es');
+
+                        // Reemplazar caracteres no válidos con un carácter específico, por ejemplo, "1"
+                        concatenatedProducts = concatenatedProducts.replace(/[^A-Z0-9]/g, '1');
+
+                        // Ahora concatenatedProducts tiene solo letras mayúsculas y números
+                        console.log('Formato corregido:', concatenatedProducts);
+                    }
+
 
                     return (
                         <tr key={index}>
@@ -64,15 +109,17 @@ const TableContent = () => {
                                 >
                                     Ver
                                 </Link>
-                                <a href='individual' id="descargar" onClick={() => saveTextFile([date + nOrden + customerID + firstName + lastName + telephoneNumber + paidTotal], "archivo.txt")}>Descargar TXT</a>
+                                {console.log(Number("001"))}
+                                <a href='individual' id="descargar" onClick={() => saveTextFile(["HRFACTURACION" + "   " + Number(formattedDate2.join("")) + Number(nOrden) + " ".repeat(104) + 0 + 0 + 3 + 2 + 0 + 0 + 0 + 1 + 12 + 23 + 34 + 45 + 56 + 78 + 89 + 98 + 76 + 5 + 241223 + 0 + Number("10000000010") + 241224 + 0 + Number("10000000050") + 241225 + 0 + Number("10000000090") + "EASTNETINTERNET" + concatenatedProducts + " ".repeat(10) + "TRFACTURACION" + 0 + 0 + 0 + 0 + 0 + 0 + 0 + 3 + 0 + 0 + 0 + 0 + 0 + 0 + 0 + Number("10000000010") + 0 + 0 + 0 + 0 + 0 + 0 + 0 + Number("10000000050") + 0 + 0 + 0 + 0 + 0 + 0 + 0 + Number("10000000090") + " ".repeat(56)], [customerID, date]
+                                )}>Descargar TXT</a>
                             </td>
                         </tr>
                     );
                 })
             ) : (
-                    <tr>
-                        <td colSpan="7">No hay datos en localStorage</td>
-                    </tr>
+                <tr>
+                    <td colSpan="7">No hay datos en localStorage</td>
+                </tr>
             )}
             {/* Agrega el botón para descargar el archivo ZIP */}
             {localStorage.tangoData ?

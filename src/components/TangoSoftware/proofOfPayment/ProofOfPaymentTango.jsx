@@ -1,32 +1,98 @@
-// En ProofOfPaymentTango.jsx
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import s from './ProofOfPaymentTango.module.css';
 import logo from '../../../assets/Logo_files/Logo.png';
 import saveTextFile from '../../../file/File.js';
 
+function I2of5(DataToEncode) {
+    let DataToPrint = "";
+    let OnlyCorrectData = "";
 
+    for (let i = 0; i < DataToEncode.length; i++) {
+        const currentCharNum = DataToEncode.charCodeAt(i);
+        if (currentCharNum > 47 && currentCharNum < 58) {
+            OnlyCorrectData += DataToEncode[i];
+        }
+    }
 
+    DataToEncode = OnlyCorrectData;
+
+    if (DataToEncode.length % 2 === 1) {
+        DataToEncode = "0" + DataToEncode;
+    }
+
+    const startCode = String.fromCharCode(203);
+    const stopCode = String.fromCharCode(204);
+
+    for (let i = 0; i < DataToEncode.length; i += 2) {
+        const currentCharNum = parseInt(DataToEncode.substr(i, 2), 10);
+
+        if (currentCharNum < 94) {
+            DataToPrint += String.fromCharCode(currentCharNum + 33);
+        }
+
+        if (currentCharNum > 93) {
+            DataToPrint += String.fromCharCode(currentCharNum + 103);
+        }
+    }
+
+    const printableString = startCode + DataToPrint + stopCode;
+
+    return printableString;
+}
 
 const ProofOfPaymentTango = () => {
     const proofOfPaymentData = useSelector((state) => state.tango.proofOfPaymentData);
-    let date = proofOfPaymentData?.date.slice(0, 10)
     const navigate = useNavigate();
 
     const handleNavigateToTango = () => {
         navigate('/tableTango');
     };
 
+    const formattedDate = proofOfPaymentData.date.replace(/-/g, '');
+    const dateYear = formattedDate.slice(2, 4);
+    const dateMonth = formattedDate.slice(4, 6);
+    const dateDay = formattedDate.slice(6, 8);
+    const barCodeDate = Number([dateYear, dateMonth, dateDay].join(""));
+
+    const calculateCheckDigits = (data) => {
+        const cleanedData = data.replace(/\s/g, '');
+
+        let sum = 0;
+        for (let i = 0; i < cleanedData.length; i++) {
+            let multiplier = i % 2 === 0 ? 1 : 3;
+            sum += parseInt(cleanedData[i], 10) * multiplier;
+        }
+
+        const firstCheckDigit = (Math.floor(sum / 10) + 1) * 10 - sum;
+
+        const dataWithFirstDigit = `${cleanedData}${firstCheckDigit}`;
+        let sumSecond = 0;
+        for (let i = 0; i < dataWithFirstDigit.length; i++) {
+            let multiplier = i % 2 === 0 ? 1 : 3;
+            sumSecond += parseInt(dataWithFirstDigit[i], 10) * multiplier;
+        }
+
+        const secondCheckDigit = (Math.floor(sumSecond / 10) + 1) * 10 - sumSecond;
+
+        const formattedResult = `${dataWithFirstDigit.slice(0, 4)} ${dataWithFirstDigit.slice(4, 5)} ${dataWithFirstDigit.slice(5, 13)} ${dataWithFirstDigit.slice(13, 19)} ${dataWithFirstDigit.slice(19, 26)} ${dataWithFirstDigit.slice(26, 28)} ${dataWithFirstDigit.slice(28, 35)} ${dataWithFirstDigit.slice(35, 37)} ${dataWithFirstDigit.slice(37, 44)} ${dataWithFirstDigit.slice(44, 54)} ${dataWithFirstDigit.slice(54, 55)} ${secondCheckDigit}`;
+
+        return formattedResult;
+    };
+
+    const barcodeData = `04472${proofOfPaymentData.nOrden.padStart(8, "0")}${barCodeDate}${String(proofOfPaymentData.paidTotal).padStart(7, "0")}0000000000000000001234567890`;
+
+    const barcodeWithCheckDigits = calculateCheckDigits(barcodeData);
+
 
     return (
         <div className={s.body}>
-            <fieldset style={{ width: "43rem", height: "65rem", padding: "0rem 1rem" }}>
+            <fieldset style={{ width: "43rem", height: "75rem", padding: "0rem 1rem" }}>
                 <div className={s.header}>
                     <div className={s.logo}>
                         <img src={logo} alt='logo'></img>
-                        <div >{date}</div>
+                        <div>{proofOfPaymentData.date}</div>
                     </div>
                     <div className={s.nOrden}>{proofOfPaymentData.nOrden}</div>
                     <div className={s.company}>
@@ -89,15 +155,18 @@ const ProofOfPaymentTango = () => {
                 </div>
                 <div className={s.state}>Pago / Impago</div>
                 <div className={s.backButton}>
-                <button onClick={handleNavigateToTango}>Volver</button>
+                    <button onClick={handleNavigateToTango}>Volver</button>
                 </div>
                 <div className={s.downloadButton}>
-                <button href='#' id="descargar" onClick={() => saveTextFile([proofOfPaymentData.date + proofOfPaymentData.nOrden + proofOfPaymentData.customerID + proofOfPaymentData.firstName + proofOfPaymentData.lastName + proofOfPaymentData.telephoneNumber + proofOfPaymentData.paidTotal], "archivo.txt")}>Descargar TXT</button>
+                    <button href='#' id="descargar" onClick={() => saveTextFile([proofOfPaymentData.date + proofOfPaymentData.nOrden + proofOfPaymentData.customerID + proofOfPaymentData.firstName + proofOfPaymentData.lastName + proofOfPaymentData.telephoneNumber + proofOfPaymentData.paidTotal], "archivo.txt")}>Descargar TXT</button>
+                </div>
+                <div className={s.barCode} >
+                    {I2of5(barcodeWithCheckDigits)}
+                    <br />
                 </div>
             </fieldset>
         </div>
     );
 }
-
 
 export default ProofOfPaymentTango;
