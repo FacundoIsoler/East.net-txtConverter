@@ -70,7 +70,7 @@ const DataTango = ({ saveTangoData }) => {
             setShowSavedMessage(false);
             navigate('/data/tango/clients');
         }, 2000);
-        console.log(json, "DataTango")
+        // console.log(json, "DataTango")
     }
 
     return (
@@ -89,7 +89,7 @@ const DataTango = ({ saveTangoData }) => {
                 ></textarea>
             </div>
             <div className="input-section">
-                <label htmlFor="fileInput" className="label">
+                <label htmlFor="fileInput" className="label-2">
                     Subir archivo JSON:
                 </label>
                 <input
@@ -100,14 +100,14 @@ const DataTango = ({ saveTangoData }) => {
                     className="file-input"
                 />
             </div>
-            <button
+            <button className='button-json'
                 onClick={handleJson}
             >
                 JSON PRUEBA
             </button>
 
             <div>
-                <button onClick={handleSaveJson}>Guardar JSON</button>
+                <button className='button-json' onClick={handleSaveJson}>Guardar JSON</button>
             </div>
             {showSavedMessage && (
                 <div className="success-message">

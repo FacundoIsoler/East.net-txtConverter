@@ -1,60 +1,68 @@
 /* src/App.css */
+@font-face {
+  font-family: 'Museo Sans-300';
+  src: url(./assets/Fonts/MuseoSansCyrl-300.ttf);
+}
+
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  max-width: 100%;
 }
 
-.App-header {
-  flex: 0 0 auto;
-  position: fixed;
-  width: 100%;
-}
 
-.App-main {
-  flex: 1;
-  margin-top: 4rem;
+main {
+  height: 90vh;
 }
 
 .App-footer {
-  flex: 0 0 auto;
+  display: flex;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  width:100%;
+  text-align: center;
 }
 
-/* Ajusta el área de contenido principal para tener en cuenta el pie de página fijo */
-.App-main {
-  flex-grow: 1;
-}
-
-/* Opcional: Agrega un margen en la parte inferior del contenido principal */
-main {
-  margin-bottom: 50px;
-  /* Ajusta el valor según sea necesario */
-}
-
-/* Ajusta todos los botones en la aplicación */
-button {
-  padding: 10px;
-  background-color: #27afaf;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  width: 30%;
-  /* Ajusta el ancho según sea necesario */
-}
-
-button:hover {
-  background-color: #186e6e;
+/* Todas las imágenes deben ser del mismo tamañño que su contenedor*/
+img {
+  width: 100%;
 }
 
 /* Ajusta la apariencia de los elementos en pantallas más pequeñas */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 37.5rem) {
   .App-main {
     margin-top: 3rem;
   }
+}
 
-  main {
-    margin-bottom: 30px;
+@media (min-width:320px) {
+
+  /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+  table,
+  p,
+  img {
+    padding-right: 1em;
+    width: 100%;
   }
+}
+
+@media (min-width:480px) {
+  /* smartphones, Android phones, landscape iPhone */
+}
+
+@media (min-width:600px) {
+  /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+}
+
+@media (min-width:801px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width:1025px) {
+  /* big landscape tablets, laptops, and desktops */
+}
+
+@media (min-width:1281px) {
+  /* hi-res laptops and desktops */
 }

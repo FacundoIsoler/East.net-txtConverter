@@ -1,14 +1,20 @@
 /* src/components/home/Home.css */
+
+
 .container {
     text-align: center;
-}
-
-h1 {
+    height: 100%;
+    background-image: url('../../assets/Imagenes/Home.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     color: #333;
+
 }
 
-h2 {
-    color: #555;
+
+
+
+.button-zone {
     margin-bottom: 6.25rem;
 }
 
@@ -17,7 +23,19 @@ h2 {
     justify-content: center;
 }
 
+.button-home {
+    font-size: 3rem;
+    height: 10rem;
+    margin: 2.625rem;
+    cursor: pointer;
+    border-radius: .3125rem;
+    background-color: #252525;
+    color: white;
+    transition: background-color 0.3s ease;
+    width: 30%;
+}
 
-button:hover {
-    background-color: #45a049;
+
+.button-home:hover {
+    background-color: #186e6e;
 }

@@ -3,8 +3,5 @@
 .Footer {
     background-color: #282c34;
     color: white;
-    padding-bottom: 10px;
-    text-align: center;
-    width: 100%;
-    bottom: 0;
+    width: 100%;    
 }

@@ -17,11 +17,11 @@ const Home = () => {
     return (
         <div className="container">
             <h1>Home</h1>
-            <div>
+            <div className='button-zone'>
                 <h2>Elige una opción:</h2>
                 <div className="button-container">
-                    <button onClick={handleNavigateToTango}>Tango Software</button>
-                    <button onClick={handleNavigateToRoela}>Roela</button>
+                    <button className='button-home' onClick={handleNavigateToTango}>Tango Software</button>
+                    <button className='button-home' onClick={handleNavigateToRoela}>Roela</button>
                 </div>
             </div>
         </div>

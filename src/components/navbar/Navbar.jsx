@@ -12,15 +12,17 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="logo">
-        <img src={logo} alt="Logo" />
+      <div className='container-flex'>
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <nav  >
+          <ul className='nav-list'>
+            <li className='nav-item'><Link to="/" className='nav-link' onClick={handleClearLocalStorage}>Inicio</Link></li>
+            {/* <li className='nav-item'><Link to="/data/tango" className='nav-link'>Data Tango</Link></li> */}
+          </ul>
+        </nav>
       </div>
-      <nav  >
-        <ul className='nav-list'>
-          <li className='nav-item'><Link to="/" className='nav-link' onClick={handleClearLocalStorage}>Inicio</Link></li>
-          <li className='nav-item'><Link to="/data/tango" className='nav-link'>Data Tango</Link></li>
-        </ul>
-      </nav>
     </div>
   );
 };
