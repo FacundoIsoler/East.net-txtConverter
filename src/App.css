@@ -29,12 +29,7 @@ img {
   width: 100%;
 }
 
-/* Ajusta la apariencia de los elementos en pantallas más pequeñas */
-@media screen and (max-width: 37.5rem) {
-  .App-main {
-    margin-top: 3rem;
-  }
-}
+
 
 @media (min-width:320px) {
 

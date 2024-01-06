@@ -1,41 +1,52 @@
 /* src/components/home/Home.css */
 
-
 .container {
     text-align: center;
-    height: 100%;
+    height: 90vh;
     background-image: url('../../assets/Imagenes/Home.jpg');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
     color: #333;
-
+    box-sizing: border-box;
+    display: flex; /* Añadido display flex para centrar verticalmente el contenido */
+    flex-direction: column; /* Cambiado a disposición de columna en dispositivos pequeños */
+    justify-content: center; /* Centra verticalmente el contenido */
 }
 
-
-
-
 .button-zone {
-    margin-bottom: 6.25rem;
+    margin-bottom: 2rem;
 }
 
 .button-container {
+    margin-top: 2rem;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centra los elementos hijos horizontalmente */
+    align-items: center; /* Centra los elementos hijos verticalmente */
 }
 
 .button-home {
-    font-size: 3rem;
-    height: 10rem;
-    margin: 2.625rem;
+    font-size: 2rem;
+    height: 5rem;
+    margin: 0.5rem; /* Ajustado el margen */
     cursor: pointer;
-    border-radius: .3125rem;
+    border-radius: 0.3125rem;
     background-color: #252525;
     color: white;
     transition: background-color 0.3s ease;
-    width: 30%;
+    width: 19.375rem; /* Ajustado el ancho para dar espacio entre los botones */
 }
-
 
 .button-home:hover {
     background-color: #186e6e;
+}
+
+/* Añadido un media query para dispositivos pequeños */
+@media screen and (max-width: 600px) {
+    .button-container {
+        flex-direction: column; /* Cambiado a disposición de columna para dispositivos pequeños */
+    }
+
+    .button-home {
+        width: 100%; /* Cambiado a ancho del 100% para dispositivos pequeños */
+    }
 }
