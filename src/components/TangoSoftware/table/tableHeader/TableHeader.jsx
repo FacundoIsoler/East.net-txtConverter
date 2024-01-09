@@ -24,7 +24,7 @@ const TableHeader = () => {
         <thead>
           <tr>
             <th>Fecha</th>
-            <th>Numero de Factura</th>
+            <th className='th-n°'>Numero de Factura</th>
             <th>Cliente</th>
             <th>Nombre</th>
             <th>Teléfono</th>

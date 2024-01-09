@@ -1,35 +1,37 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import JSZip from 'jszip'; // Importa la librería JSZip
+// import JSZip from 'jszip'; // Importa la librería JSZip
 import saveTextFile from '../../../../file/File.js';
 import { getDetail } from '../../../../actions/actions';
 import './TableContent.css';
+import descargar from '../../../../assets/Logo_files/descargar.png'
+import lupa from '../../../../assets/Logo_files/lupa.svg'
 
 const TableContent = () => {
     const dispatch = useDispatch();
 
-    // Función para manejar la descarga del archivo ZIP
-    const handleDownloadZip = () => {
-        const zip = new JSZip();
+    // // Función para manejar la descarga del archivo ZIP
+    // const handleDownloadZip = () => {
+    //     const zip = new JSZip();
 
-        if (localStorage.tangoData && JSON.parse(localStorage.tangoData).length > 0) {
-            const tangoData = JSON.parse(localStorage.tangoData);
+    //     if (localStorage.tangoData && JSON.parse(localStorage.tangoData).length > 0) {
+    //         const tangoData = JSON.parse(localStorage.tangoData);
 
-            tangoData.forEach((item, index) => {
-                const content = `${item.Date} ${item.OrderID} ${item.Customer.CustomerID} ${item.Customer.FirstName} ${item.Customer.LastName} ${item.Customer.MobilePhoneNumber} ${item.PaidTotal}`;
-                zip.file(`archivo${index + 1}.txt`, content);
-            });
+    //         tangoData.forEach((item, index) => {
+    //             const content = `${item.Date} ${item.OrderID} ${item.Customer.CustomerID} ${item.Customer.FirstName} ${item.Customer.LastName} ${item.Customer.MobilePhoneNumber} ${item.PaidTotal}`;
+    //             zip.file(`archivo${index + 1}.txt`, content);
+    //         });
 
-            // Genera el archivo ZIP y descárgalo
-            zip.generateAsync({ type: 'blob' }).then((blob) => {
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = 'archivos.zip';
-                a.click();
-            });
-        }
-    };
+    //         // Genera el archivo ZIP y descárgalo
+    //         zip.generateAsync({ type: 'blob' }).then((blob) => {
+    //             const a = document.createElement('a');
+    //             a.href = URL.createObjectURL(blob);
+    //             a.download = 'archivos.zip';
+    //             a.click();
+    //         });
+    //     }
+    // };
 
     // Función para manejar el clic en el botón "Ver"
     const handleClick = (date, nOrden, customerID, firstName, lastName, telephoneNumber, paidTotal) => {
@@ -101,17 +103,18 @@ const TableContent = () => {
                             <td>{firstName + " " + lastName}</td>
                             <td>{telephoneNumber}</td>
                             <td>${paidTotal}</td>
-                            <td>
+                            <td className='detalle'>
                                 <Link
                                     onClick={() => handleClick(date, nOrden, customerID, firstName, lastName, telephoneNumber, paidTotal)}
                                     to="/proofOfPaymentTango"
                                     className="link-button-detail"
                                 >
-                                    Ver
+                                    <img src={lupa} className='img-lupa'/>
                                 </Link>
                                 {console.log(Number("001"))}
                                 <a href='individual' id="descargar" onClick={() => saveTextFile(["HRFACTURACION" + "   " + Number(formattedDate2.join("")) + Number(nOrden) + " ".repeat(104) + 0 + 0 + 3 + 2 + 0 + 0 + 0 + 1 + 12 + 23 + 34 + 45 + 56 + 78 + 89 + 98 + 76 + 5 + 241223 + 0 + Number("10000000010") + 241224 + 0 + Number("10000000050") + 241225 + 0 + Number("10000000090") + "EASTNETINTERNET" + concatenatedProducts + " ".repeat(10) + "TRFACTURACION" + 0 + 0 + 0 + 0 + 0 + 0 + 0 + 3 + 0 + 0 + 0 + 0 + 0 + 0 + 0 + Number("10000000010") + 0 + 0 + 0 + 0 + 0 + 0 + 0 + Number("10000000050") + 0 + 0 + 0 + 0 + 0 + 0 + 0 + Number("10000000090") + " ".repeat(56)], [customerID, date]
-                                )}>Descargar TXT</a>
+                                )}><img src={descargar} className='
+                                img-descargar'/></a>
                             </td>
                         </tr>
                     );
@@ -122,13 +125,13 @@ const TableContent = () => {
                 </tr>
             )}
             {/* Agrega el botón para descargar el archivo ZIP */}
-            {localStorage.tangoData ?
+            {/* {localStorage.tangoData ?
                 <tr>
                     <td colSpan="7">
                         <button onClick={handleDownloadZip}>Descargar ZIP</button>
                     </td>
                 </tr>
-                : ""}
+                : ""} */}
         </>
     );
 };

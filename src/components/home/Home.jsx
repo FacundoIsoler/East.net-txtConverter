@@ -16,12 +16,12 @@ const Home = () => {
 
     return (
         <div className="container">
-            <h1>Home</h1>
-            <div className='button-zone'>
-                <h2>Elige una opción:</h2>
-                <div className="button-container">
-                    <button className='button-home' onClick={handleNavigateToTango}>Tango Software</button>
-                    <button className='button-home' onClick={handleNavigateToRoela}>Roela</button>
+            <div className='subcontainer'>
+                <div className='button-zone'>
+                    <div className="button-container">
+                        <button className='button-home' onClick={handleNavigateToTango}>Tango Software</button>
+                        <button className='button-home' onClick={handleNavigateToRoela}>Roela</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -25,6 +25,10 @@ tfoot {
     background-color: #f2f2f2;
 }
 
+.th-n°{
+    width: 10rem;
+}
+
 .alert {
     background-color: #f44336;
     color: white;

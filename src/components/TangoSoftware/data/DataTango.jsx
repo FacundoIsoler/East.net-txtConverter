@@ -75,39 +75,38 @@ const DataTango = ({ saveTangoData }) => {
 
     return (
         <div className="data-container">
-            <h1>Data</h1>
-            <div className="input-section">
-                <label htmlFor="jsonInput" className="label">
-                    Ingresa un JSON:
-                </label>
-                <textarea
-                    id="jsonInput"
-                    rows="4"
-                    cols="50"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                ></textarea>
-            </div>
-            <div className="input-section">
-                <label htmlFor="fileInput" className="label-2">
-                    Subir archivo JSON:
-                </label>
-                <input
-                    type="file"
-                    id="fileInput"
-                    accept=".json"
-                    onChange={handleFileChange}
-                    className="file-input"
-                />
-            </div>
-            <button className='button-json'
-                onClick={handleJson}
-            >
-                JSON PRUEBA
-            </button>
+            <div className='form-section'>
+                <div className="input-section">
+                    <label htmlFor="jsonInput" className="label">
+                        Ingresa un JSON:
+                    </label>
+                    <textarea
+                        id="jsonInput"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                    ></textarea>
+                </div>
+                <div className="input-section">
+                    <label htmlFor="fileInput" className="label-2">
+                        Subir archivo JSON:
+                    </label>
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".json"
+                        onChange={handleFileChange}
+                        className="file-input"
+                    />
+                </div>
+                {/* <button className='button-json'
+                    onClick={handleJson}
+                >
+                    JSON PRUEBA
+                </button> */}
 
-            <div>
-                <button className='button-json' onClick={handleSaveJson}>Guardar JSON</button>
+                <div>
+                    <button className='button-json' onClick={handleSaveJson}>Guardar JSON</button>
+                </div>
             </div>
             {showSavedMessage && (
                 <div className="success-message">

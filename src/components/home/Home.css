@@ -5,12 +5,16 @@
     height: 90vh;
     background-image: url('../../assets/Imagenes/Home.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
-    color: #333;
+    background-size:100% 120%;
     box-sizing: border-box;
     display: flex; /* Añadido display flex para centrar verticalmente el contenido */
     flex-direction: column; /* Cambiado a disposición de columna en dispositivos pequeños */
     justify-content: center; /* Centra verticalmente el contenido */
+}
+
+.subcontainer{
+    margin-top: -10rem;
+    width: 60%;
 }
 
 .button-zone {
@@ -26,13 +30,12 @@
 
 .button-home {
     font-size: 2rem;
-    height: 5rem;
-    margin: 0.5rem; /* Ajustado el margen */
+    height: 7rem;
+    margin: 2rem; /* Ajustado el margen */
     cursor: pointer;
     border-radius: 0.3125rem;
-    background-color: #252525;
+    background-color: #626161;
     color: white;
-    transition: background-color 0.3s ease;
     width: 19.375rem; /* Ajustado el ancho para dar espacio entre los botones */
 }
 

@@ -30,6 +30,12 @@ tr:hover {
     background-color: #f5f5f5;
 }
 
+.detalle{
+    display: flex; /* Añadido display flex para centrar verticalmente el contenido */
+    justify-content: center; /* Centra verticalmente el contenido */    width: 100%;
+    text-indent: 4em;
+}
+
 .link-button-detail {
     display: flex;
     align-items: center;
@@ -47,6 +53,16 @@ tr:hover {
 .no-data-row {
     text-align: center;
     color: #888;
+}
+
+.img-descargar{
+    height: auto;
+    width: 2.5rem;
+}
+
+.img-lupa{
+    height: auto;
+    width: 2.5rem;
 }
 
 

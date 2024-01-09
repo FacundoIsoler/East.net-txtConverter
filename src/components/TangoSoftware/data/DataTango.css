@@ -5,22 +5,32 @@
     height: 100%;
     background-image: url('../../../assets/Imagenes/Home.jpg');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    color: white;
-    text-align: center;
+    background-size: 100% 120%;
     font-size: 1.25rem;
 }
 
-.data-container h1{
+
+.form-section {
+    margin-top: 4rem;
+    width: 40%;
     text-align: center;
+    margin-left: 10rem;
 }
 
-.input-section {
-    margin-bottom: 20px;
+.input-section textarea {
+    width: 100%;
+    height: 12.5rem;
+    /* Aumenta la altura del textarea */
+    margin-bottom: .625rem;
+    /* Agrega espacio en la parte inferior del textarea */
+    padding: .625rem;
+    border: .0625rem solid #ccc;
+    border-radius: .25rem;
+    resize: vertical;
+    resize: none;
 }
-.label{
-    color: white;
-}
+
+
 
 label {
     display: block;
@@ -28,37 +38,24 @@ label {
     font-weight: bold;
 }
 
-.file-input{
+.file-input {
     font-size: 1rem;
 }
 
-textarea {
-    width: 100%;
-    height: 200px;
-    /* Aumenta la altura del textarea */
-    margin-bottom: 10px;
-    /* Agrega espacio en la parte inferior del textarea */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-}
 
 .input-section {
     display: block;
     margin-top: 10px;
     margin-bottom: 20px;
-    color: black;
     /* Agrega espacio en la parte inferior del input de archivo */
 }
 
 .button-json {
-    display: block;
-    margin: 1rem auto;
+    margin-bottom: 0.8rem;
     /* Centra el botón */
     padding: 15px 20px;
     /* Aumenta el padding para que sea más grande */
-    background-color: #333;
+    background-color: #626161;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -74,4 +71,15 @@ button:hover {
     margin-top: 20px;
     color: green;
     background-color: white;
+    text-align: center;
+}
+
+/* Añadido un media query para dispositivos pequeños */
+@media screen and (max-width: 600px) {
+
+}
+
+@media (min-width:801px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+
 }
