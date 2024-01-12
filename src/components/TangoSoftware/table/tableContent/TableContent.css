@@ -30,9 +30,12 @@ tr:hover {
     background-color: #f5f5f5;
 }
 
-.detalle{
-    display: flex; /* Añadido display flex para centrar verticalmente el contenido */
-    justify-content: center; /* Centra verticalmente el contenido */    width: 100%;
+.detalle {
+    display: flex;
+    /* Añadido display flex para centrar verticalmente el contenido */
+    justify-content: center;
+    /* Centra verticalmente el contenido */
+    width: 100%;
     text-indent: 4em;
 }
 
@@ -55,15 +58,12 @@ tr:hover {
     color: #888;
 }
 
-.img-descargar{
+.img-descargar {
     height: auto;
     width: 2.5rem;
 }
 
-.img-lupa{
+.img-lupa {
     height: auto;
     width: 2.5rem;
 }
-
-
-
