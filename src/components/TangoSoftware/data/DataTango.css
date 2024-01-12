@@ -2,7 +2,6 @@
 .data-container {
     margin: 0 auto;
     padding: 1.25rem;
-    height: 100%;
     background-image: url('../../../assets/Imagenes/Home.jpg');
     background-repeat: no-repeat;
     background-size: 100% 120%;
@@ -11,7 +10,6 @@
 
 
 .form-section {
-    margin-top: 4rem;
     width: 40%;
     text-align: center;
     margin-left: 10rem;
@@ -46,7 +44,7 @@ label {
 .input-section {
     display: block;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 1.875rem;
     /* Agrega espacio en la parte inferior del input de archivo */
 }
 
