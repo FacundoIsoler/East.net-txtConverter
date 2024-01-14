@@ -9,7 +9,6 @@ import { saveTangoData } from '../../../actions/tangoActions';
 import './DataTango.css';
 import nominaDeClientes from './nominaDeClientes';
 
-
 // Componente para manejar y guardar datos de Tango
 const DataTango = ({ saveTangoData }) => {
     const [inputValue, setInputValue] = useState('');
@@ -17,8 +16,6 @@ const DataTango = ({ saveTangoData }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const tangoData = useSelector((state) => state.tangoData);
-
-    let json = ""
 
     // Manejar cambios en el área de entrada de texto
     const handleInputChange = (event) => {
@@ -40,7 +37,8 @@ const DataTango = ({ saveTangoData }) => {
 
     // Manejar el guardado del JSON
     const handleSaveJson = () => {
-        saveTangoData(inputValue);
+        // Utiliza redux-thunk para manejar operaciones asincrónicas
+        dispatch(saveTangoDataAsync(inputValue));
         localStorage.setItem('tangoData', inputValue);
         setShowSavedMessage(true);
 
@@ -49,28 +47,21 @@ const DataTango = ({ saveTangoData }) => {
             setShowSavedMessage(false);
             navigate('/tableTango');
         }, 2000);
-
-        // Actualizar detalles con el nuevo tangoData
-        dispatch(getDetail(tangoData));
     };
-
 
     const handleJson = () => {
         // Obtener la cadena JSON del objeto
         const jsonString = JSON.stringify(nominaDeClientes.resultData.list);
 
         // Establecer la cadena JSON en el textarea
-        json = nominaDeClientes.resultData.list
         localStorage.setItem('tangoData', jsonString);
         setShowSavedMessage(true);
-
 
         // Redirigir a la página de gestión de Tango después de 2 segundos
         setTimeout(() => {
             setShowSavedMessage(false);
             navigate('/data/tango/clients');
         }, 2000);
-        // console.log(json, "DataTango")
     }
 
     return (
@@ -98,11 +89,6 @@ const DataTango = ({ saveTangoData }) => {
                         className="file-input"
                     />
                 </div>
-                {/* <button className='button-json'
-                    onClick={handleJson}
-                >
-                    JSON PRUEBA
-                </button> */}
 
                 <div>
                     <button className='button-json' onClick={handleSaveJson}>Guardar JSON</button>
@@ -112,10 +98,22 @@ const DataTango = ({ saveTangoData }) => {
                 <div className="success-message">
                     JSON guardado con éxito. Redireccionando a la página de gestión de Tango Software...
                 </div>
-
             )}
         </div>
     );
+};
+
+const saveTangoDataAsync = (data) => {
+    return async (dispatch) => {
+        try {
+            // Simula una operación asincrónica con una espera de 1 segundo
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            dispatch(saveTangoData(data));
+        } catch (error) {
+            console.error("Error en la operación asincrónica:", error);
+        }
+    };
 };
 
 export default connect(null, { saveTangoData })(DataTango);
