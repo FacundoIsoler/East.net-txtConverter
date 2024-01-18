@@ -1,0 +1,33 @@
+/* src/components/Roela/proofOfPayment/ProofOfPaymentRoela.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.payment-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    margin-bottom: 10px;
+}
+
+/* Add more styles as needed */

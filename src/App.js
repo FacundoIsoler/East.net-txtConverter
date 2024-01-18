@@ -8,6 +8,8 @@ import ProofOfPayment from './components/TangoSoftware/proofOfPayment/ProofOfPay
 import TableTango from './components/TangoSoftware/table/tableTango/TableTango';
 import Footer from './components/footer/Footer';
 import './App.css';
+import DataRoela from './components/Roela/data/DataRoela';
+import ProofOfPaymentRoela from './components/Roela/proofOfPayment/ProofOfPaymentRoela';
 // import Clients from './components/TangoSoftware/data/clients/Clients';
 
 function App() {
@@ -20,11 +22,16 @@ function App() {
         <main className="App-main">
           <Routes>
             <Route path="/" element={<Home />} />
+
+            {/* TangoSoftware */}
             <Route path="/data/tango" element={<DataTango />} />
             {/* <Route path="/data/tango/clients" element={<Clients />} /> */}
             <Route path="/proofOfPaymentTango" element={<ProofOfPayment />} />
             <Route path="/tableTango" element={<TableTango />} />
-          </Routes>
+
+            {/* Roela */}
+            <Route path="/data/roela" element={<DataRoela />} />
+            <Route path="/proofOfPaymentRoela" element={<ProofOfPaymentRoela  />} />          </Routes>
         </main>
         <footer className="App-footer">
           <Footer />

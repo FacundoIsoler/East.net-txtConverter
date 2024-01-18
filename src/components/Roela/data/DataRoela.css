@@ -1,0 +1,58 @@
+/* src/components/Roela/data/DataRoela.module.css */
+.dataContainer {
+    margin: 0 auto;
+    padding: 1.25rem;
+    background-image: url('../../../assets/Imagenes/Home.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
+    font-size: 1.25rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formSection {
+    width: 40%;
+    text-align: center;
+    margin-top: 1rem; /* Agregado para dar espacio desde la parte superior */
+}
+
+
+
+.fileInput {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+
+
+.buttonJson {
+    margin-bottom: 0.8rem;
+    padding: 15px 20px;
+    background-color: #626161;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #186e6e;
+}
+
+.success-message {
+    margin-top: 20px;
+    color: green;
+    background-color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    /* Añade estilos específicos para dispositivos pequeños */
+}
+
+@media (min-width: 801px) {
+    /* Estilos para tabletas, iPads en modo paisaje, laptops con baja resolución y escritorios */
+}
