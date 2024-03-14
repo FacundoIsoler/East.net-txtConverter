@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
 import DataTango from './components/TangoSoftware/data/DataTango';
+import TangoDataJson from './components/TangoSoftware/data/TangoDataJson';
 import ProofOfPayment from './components/TangoSoftware/proofOfPayment/ProofOfPaymentTango';
 import TableTango from './components/TangoSoftware/table/tableTango/TableTango';
 import Footer from './components/footer/Footer';
@@ -25,13 +26,15 @@ function App() {
 
             {/* TangoSoftware */}
             <Route path="/data/tango" element={<DataTango />} />
+            <Route path="/tangoDataJson" element={<TangoDataJson />} />
             {/* <Route path="/data/tango/clients" element={<Clients />} /> */}
             <Route path="/proofOfPaymentTango" element={<ProofOfPayment />} />
             <Route path="/tableTango" element={<TableTango />} />
 
             {/* Roela */}
             <Route path="/data/roela" element={<DataRoela />} />
-            <Route path="/proofOfPaymentRoela" element={<ProofOfPaymentRoela  />} />          </Routes>
+            <Route path="/proofOfPaymentRoela" element={<ProofOfPaymentRoela />} />
+          </Routes>
         </main>
         <footer className="App-footer">
           <Footer />

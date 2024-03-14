@@ -26,28 +26,28 @@ const DataTango = ({ saveTangoData }) => {
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
-
+    
         reader.onload = (e) => {
             const fileContent = e.target.result;
             setInputValue(fileContent);
         };
-
+    
         reader.readAsText(file);
     };
+    
 
     // Manejar el guardado del JSON
     const handleSaveJson = () => {
         // Utiliza redux-thunk para manejar operaciones asincrónicas
         dispatch(saveTangoDataAsync(inputValue));
-        localStorage.setItem('tangoData', inputValue);
-        setShowSavedMessage(true);
-
+    
         // Redirigir a la página de gestión de Tango después de 2 segundos
         setTimeout(() => {
             setShowSavedMessage(false);
-            navigate('/tableTango');
+            navigate('/tangoDataJson');
         }, 2000);
     };
+    
 
     const handleJson = () => {
         // Obtener la cadena JSON del objeto
@@ -84,7 +84,7 @@ const DataTango = ({ saveTangoData }) => {
                     <input
                         type="file"
                         id="fileInput"
-                        accept=".json"
+                        accept=".csv"
                         onChange={handleFileChange}
                         className="file-input"
                     />

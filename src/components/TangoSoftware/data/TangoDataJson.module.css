@@ -1,0 +1,21 @@
+/* TangoDataJson.module.css */
+
+.tableContainer {
+    overflow-x: auto; /* Agrega scroll horizontal si la tabla es más ancha que su contenedor */
+}
+
+.table {
+    width: 100%; /* La tabla ocupa el 100% del ancho de su contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+.th, .td {
+    padding: 8px; /* Espaciado interno de las celdas */
+    border: 1px solid #ddd; /* Borde de las celdas */
+    text-align: center; /* Alineación del texto en las celdas */
+}
+
+.th {
+    background-color: #f2f2f2; /* Color de fondo del encabezado */
+    font-weight: bold; /* Texto en negrita en el encabezado */
+}
