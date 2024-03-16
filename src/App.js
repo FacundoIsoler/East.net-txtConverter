@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
-import DataTango from './components/TangoSoftware/data/DataTango';
+import DataTango2 from './components/TangoSoftware/data/DataTango2';
 import TangoDataJson from './components/TangoSoftware/data/TangoDataJson';
 import ProofOfPayment from './components/TangoSoftware/proofOfPayment/ProofOfPaymentTango';
 import TableTango from './components/TangoSoftware/table/tableTango/TableTango';
@@ -25,7 +25,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             {/* TangoSoftware */}
-            <Route path="/data/tango" element={<DataTango />} />
+            <Route path="/data/tango" element={<DataTango2 />} />
             <Route path="/tangoDataJson" element={<TangoDataJson />} />
             {/* <Route path="/data/tango/clients" element={<Clients />} /> */}
             <Route path="/proofOfPaymentTango" element={<ProofOfPayment />} />

@@ -19,3 +19,5 @@ export const getDetail = (date, nOrden, customerID, firstName, lastName, telepho
         paidTotal: paidTotal,
     },
 });
+
+
