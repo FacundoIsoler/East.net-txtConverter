@@ -11,6 +11,7 @@ import Footer from './components/footer/Footer';
 import './App.css';
 import DataRoela from './components/Roela/data/DataRoela';
 import ProofOfPaymentRoela from './components/Roela/proofOfPayment/ProofOfPaymentRoela';
+import TablaDefinitiva from './components/TangoSoftware/data/TablaDefinitiva';
 // import Clients from './components/TangoSoftware/data/clients/Clients';
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
             {/* <Route path="/data/tango/clients" element={<Clients />} /> */}
             <Route path="/proofOfPaymentTango" element={<ProofOfPayment />} />
             <Route path="/tableTango" element={<TableTango />} />
+            <Route path="/tablaDefinitiva" element={<TablaDefinitiva />} />
+
 
             {/* Roela */}
             <Route path="/data/roela" element={<DataRoela />} />

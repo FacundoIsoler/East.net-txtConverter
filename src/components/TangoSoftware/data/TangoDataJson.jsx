@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './TangoDataJson.module.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const TangoDataJson = () => {
     const location = useLocation();
     const jsonOutput1 = JSON.parse(location.state.jsonOutput1);
     const jsonOutput2 = JSON.parse(location.state.jsonOutput2);
+    const navigate = useNavigate();
 
     const modifyDecimals = (value, key) => {
         const numericValue = parseFloat(value);
@@ -18,7 +19,7 @@ const TangoDataJson = () => {
     };
 
     const renderTable = (jsonData) => {
-        if (!jsonData) return null;
+        if (!jsonData || !jsonData.length) return <p>No hay datos para mostrar</p>;
 
         return (
             <div className={styles.tableContainer}>
@@ -44,17 +45,16 @@ const TangoDataJson = () => {
         );
     };
 
+    const handleGoToTablaDefinitiva = () => {
+        navigate('/TablaDefinitiva', { state: { jsonOutput1, jsonOutput2 } });
+    };
+
     return (
         <div>
+            <button onClick={handleGoToTablaDefinitiva}>Ir a Tabla Definitiva</button>
             <h1>JSON generado por el script Tango_facturas.js</h1>
-            <div className={styles.section}>
-                <h2>Tango_facturas</h2>
-                {renderTable(jsonOutput1)}
-            </div>
-            <div className={styles.section}>
-                <h2>Detalles_facturas</h2>
-                {renderTable(jsonOutput2)}
-            </div>
+            {renderTable(jsonOutput1)}
+            {renderTable(jsonOutput2)}            
         </div>
     );
 };
