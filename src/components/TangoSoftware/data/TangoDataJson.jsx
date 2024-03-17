@@ -52,8 +52,9 @@ const TangoDataJson = () => {
     return (
         <div>
             <button onClick={handleGoToTablaDefinitiva}>Ir a Tabla Definitiva</button>
-            <h1>JSON generado por el script Tango_facturas.js</h1>
+            <h2>Tango_facturas</h2>
             {renderTable(jsonOutput1)}
+            <h2>Detalles_facturas</h2>
             {renderTable(jsonOutput2)}            
         </div>
     );

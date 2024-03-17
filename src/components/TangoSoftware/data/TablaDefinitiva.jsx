@@ -12,7 +12,7 @@ const TablaDefinitiva = () => {
             return { ...acc, [newKey]: obj[key] };
         }, {});
     };
-    
+
     // Mapeo de nombres de claves para jsonOutput1
     const keyMapJsonOutput1 = {
         "FECHA_VTO": "FECHA_VTO",
@@ -20,7 +20,7 @@ const TablaDefinitiva = () => {
         "T_COMP": "T_COMP",
         // Agrega más mapeos aquí según sea necesario
     };
-    
+
     // Mapeo de nombres de claves para jsonOutput2
     const keyMapJsonOutput2 = {
         "Nro. comprobante": "N_COMP",
@@ -31,18 +31,18 @@ const TablaDefinitiva = () => {
         "Fecha de emisi�n": "FECHA_EMISION",
         // Agrega más mapeos aquí según sea necesario
     };
-    
+
     // Convertir los nombres de las claves en jsonOutput1 y jsonOutput2
     const jsonOutput1WithRenamedKeys = jsonOutput1.map(item => renameKeys(item, keyMapJsonOutput1));
     const jsonOutput2WithRenamedKeys = jsonOutput2.map(item => renameKeys(item, keyMapJsonOutput2));
-    
+
     // console.log({jsonOutput1WithRenamedKeys});
     // console.log({jsonOutput2WithRenamedKeys});
-    
-    const mergeData = (jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys) => { 
+
+    const mergeData = (jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys) => {
         console.log(jsonOutput1WithRenamedKeys[2])
         const mergedData = [];
-    
+
         jsonOutput1WithRenamedKeys.forEach(obj1 => {
             jsonOutput2WithRenamedKeys.forEach(obj2 => {
                 if (obj1.N_COMP === obj2.N_COMP && obj1.T_COMP === obj2.T_COMP) {
@@ -50,12 +50,12 @@ const TablaDefinitiva = () => {
                         N_COMP: obj1.N_COMP,
                         T_COMP: obj1.T_COMP,
                         FECHA_EMISION: obj2.FECHA_EMISION,
-                        FECHA_VTO: obj1.FECHA_VTO.slice(0,10),
-                        IMPORTE_VTO: obj1.IMPORTE_VT,
-                        ALTERNATIVA_1: obj1.ALTERNATIVA_1.slice(0,10),
-                        IMPORTE_TOTAL_1: obj1.IMPORTE_TOTAL_1,
-                        ALTERNATIVA_2: obj1.ALTERNATIVA_2.slice(0,10),
-                        IMPORTE_TOTAL_2: obj1.IMPORTE_TOTAL_2,
+                        FECHA_VTO: obj1.FECHA_VTO.slice(0, 10),
+                        IMPORTE_VTO: parseInt(obj1.IMPORTE_VT),
+                        ALTERNATIVA_1: obj1.ALTERNATIVA_1.slice(0, 10),
+                        IMPORTE_TOTAL_1: parseInt(obj1.IMPORTE_TOTAL_1),
+                        ALTERNATIVA_2: obj1.ALTERNATIVA_2.slice(0, 10),
+                        IMPORTE_TOTAL_2: parseInt(obj1.IMPORTE_TOTAL_2),
                         COD_CLIENTE: obj2.COD_CLIENTE,
                         RAZON_SOCIAL: obj2.RAZON_SOCIAL,
                         TELEFONO: obj2.TEL,
@@ -65,19 +65,19 @@ const TablaDefinitiva = () => {
                 }
             });
         });
-    
+
         return mergedData;
     };
-    
+
     // Combinar los datos de jsonOutput1WithRenamedKeys y jsonOutput2WithRenamedKeys
     const mergedData = mergeData(jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys);
-    
-    console.log({mergedData: mergedData[2]});
-    
-    
+
+    console.log({ mergedData: mergedData[2] });
 
 
-    
+
+
+
 
     return (
         <div className={styles.container}>
@@ -86,7 +86,7 @@ const TablaDefinitiva = () => {
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                        <th>N_comp</th>
+                            <th>N_comp</th>
                             <th>T_comp</th>
                             <th>FECHA_EMISION</th>
                             <th>FECHA_VTO</th>
@@ -103,18 +103,19 @@ const TablaDefinitiva = () => {
                     <tbody>
                         {mergedData.map((item, index) => (
                             <tr key={index}>
-                                <td>{item.N_COMP}</td>
-                                <td>{item.T_COMP}</td>
-                                <td>{item.FECHA_EMISION}</td>
-                                <td>{item.FECHA_VTO}</td>
-                                <td>{item.IMPORTE_VTO}</td>
-                                <td>{item.ALTERNATIVA_1}</td>
-                                <td>{item.IMPORTE_TOTAL_1}</td>
-                                <td>{item.ALTERNATIVA_2}</td>
-                                <td>{item.IMPORTE_TOTAL_2}</td>
-                                <td>{item.COD_CLIENTE}</td>
-                                <td>{item.RAZON_SOCIAL}</td>
-                                <td>{item.TELEFONO}</td>
+                                <td className={styles.centerText}>{item.N_COMP}</td>
+                                <td className={styles.centerText}>{item.T_COMP}</td>
+                                <td className={styles.centerText}>{item.FECHA_EMISION}</td>
+                                <td className={styles.centerText}>{item.FECHA_VTO}</td>
+                                <td className={`${styles.importe} ${styles.alignRight}`}>{item.IMPORTE_VTO}</td>
+                                <td className={styles.centerText}>{item.ALTERNATIVA_1}</td>
+                                <td className={`${styles.importe} ${styles.alignRight}`}>{item.IMPORTE_TOTAL_1}</td>
+                                <td className={styles.centerText}>{item.ALTERNATIVA_2}</td>
+                                <td className={`${styles.importe} ${styles.alignRight}`}>{item.IMPORTE_TOTAL_2}</td>
+                                <td className={styles.centerText}>{item.COD_CLIENTE}</td>
+                                <td className={styles.centerText}>{item.RAZON_SOCIAL}</td>
+                                <td className={styles.centerText}>{item.TELEFONO}</td>
+
                             </tr>
                         ))}
                     </tbody>

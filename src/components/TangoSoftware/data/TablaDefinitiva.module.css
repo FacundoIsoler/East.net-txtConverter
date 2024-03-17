@@ -29,3 +29,23 @@
 .table tr:hover {
     background-color: #ddd;
 }
+
+.table td {
+    position: relative; /* Agrega posición relativa para que el signo "$" sea relativo a la celda */
+    max-width: 150px; /* Ancho máximo para esta columna */
+}
+
+.centerText {
+    text-align: center;
+}
+
+.importe::before {
+    content: "$"; /* Agrega el signo "$" antes del contenido de la celda */
+    position: absolute; /* Posición absoluta para el signo "$" */
+    left: 5px; /* Ajusta la posición del signo "$" a la izquierda */
+}
+
+.alignRight {
+    text-align: right;
+}
+
