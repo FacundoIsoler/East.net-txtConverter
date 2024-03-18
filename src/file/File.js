@@ -1,6 +1,8 @@
 const saveTextFile = (content, [customerID, date]) => {
-    const formattedDate = date.replace(/-/g, ''); // Eliminar guiones de la fecha
-    const fileName = `${customerID}.${formattedDate}.txt`; // Agregar la extensión .txt
+    console.log(content)
+    console.log(customerID)
+    console.log(date)
+    const fileName = `${customerID}.${date}.txt`; // Agregar la extensión .txt
 
     const a = document.createElement("a");
     const file = new Blob([content], { type: 'text/plain' });

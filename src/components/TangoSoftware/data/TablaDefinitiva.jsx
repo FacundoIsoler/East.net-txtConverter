@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from './TablaDefinitiva.module.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import lupa from '../../../assets/Logo_files/lupa.svg';
+import { useDispatch } from 'react-redux';
+import { getDetail } from '../../../actions/actions.js';
 
 const TablaDefinitiva = () => {
+    const dispatch = useDispatch();
     const location = useLocation();
+    const navigate = useNavigate();
     const { jsonOutput1, jsonOutput2 } = location.state || {};
 
     const renameKeys = (obj, keyMap) => {
@@ -36,11 +41,30 @@ const TablaDefinitiva = () => {
     const jsonOutput1WithRenamedKeys = jsonOutput1.map(item => renameKeys(item, keyMapJsonOutput1));
     const jsonOutput2WithRenamedKeys = jsonOutput2.map(item => renameKeys(item, keyMapJsonOutput2));
 
-    // console.log({jsonOutput1WithRenamedKeys});
-    // console.log({jsonOutput2WithRenamedKeys});
+    const dateFormat = (date) => {
+        const fechaEmision = new Date(date);
+        // Formatear la fecha como DDMMYYYY
+        const day = fechaEmision.getUTCDate();
+        const month = fechaEmision.getUTCMonth() + 1;
+        const year = fechaEmision.getUTCFullYear();
+        const fechaDefinitiva = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`;
+        return fechaDefinitiva;
+    };
+
+    const fechaEmision = (date) => {
+        // Fecha de emisión en formato de cadena (MM/DD/YYYY)
+        const fechaEmisionStr = date;
+        // Dividir la cadena en componentes de fecha
+        const parts = fechaEmisionStr.split('/');
+        const month = parseInt(parts[1], 10); // Mes (0-11)
+        const day = parseInt(parts[0], 10);   // Día
+        const year = parseInt(parts[2], 10);  // Año
+        // Crear un objeto de fecha
+        const fechaEmisionDate = new Date(year, month - 1, day); // Restar 1 al mes porque en Date el mes es 0-11
+        return fechaEmisionDate;
+    };
 
     const mergeData = (jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys) => {
-        console.log(jsonOutput1WithRenamedKeys[2])
         const mergedData = [];
 
         jsonOutput1WithRenamedKeys.forEach(obj1 => {
@@ -49,18 +73,16 @@ const TablaDefinitiva = () => {
                     mergedData.push({
                         N_COMP: obj1.N_COMP,
                         T_COMP: obj1.T_COMP,
-                        FECHA_EMISION: obj2.FECHA_EMISION,
-                        FECHA_VTO: obj1.FECHA_VTO.slice(0, 10),
+                        FECHA_EMISION: dateFormat(fechaEmision(obj2.FECHA_EMISION)),
+                        FECHA_VTO: dateFormat(obj1.FECHA_VTO),
                         IMPORTE_VTO: parseInt(obj1.IMPORTE_VT),
-                        ALTERNATIVA_1: obj1.ALTERNATIVA_1.slice(0, 10),
+                        ALTERNATIVA_1: dateFormat(obj1.ALTERNATIVA_1),
                         IMPORTE_TOTAL_1: parseInt(obj1.IMPORTE_TOTAL_1),
-                        ALTERNATIVA_2: obj1.ALTERNATIVA_2.slice(0, 10),
+                        ALTERNATIVA_2: dateFormat(obj1.ALTERNATIVA_2),
                         IMPORTE_TOTAL_2: parseInt(obj1.IMPORTE_TOTAL_2),
                         COD_CLIENTE: obj2.COD_CLIENTE,
                         RAZON_SOCIAL: obj2.RAZON_SOCIAL,
                         TELEFONO: obj2.TEL,
-                        // ...obj1, // Agrega todas las propiedades de obj1
-                        // ...obj2, // Agrega todas las propiedades de obj2
                     });
                 }
             });
@@ -72,12 +94,10 @@ const TablaDefinitiva = () => {
     // Combinar los datos de jsonOutput1WithRenamedKeys y jsonOutput2WithRenamedKeys
     const mergedData = mergeData(jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys);
 
-    console.log({ mergedData: mergedData[2] });
-
-
-
-
-
+    const handleClick = (date, nComp, customerID, razonSocial, telephoneNumber, paidTotal) => {
+        dispatch(getDetail(date, nComp, customerID, razonSocial, telephoneNumber, paidTotal));
+        navigate('/proofOfPaymentTango');
+    };
 
     return (
         <div className={styles.container}>
@@ -98,6 +118,7 @@ const TablaDefinitiva = () => {
                             <th>COD_CLIENTE</th>
                             <th>RAZON_SOCIAL</th>
                             <th>TELEFONO</th>
+                            <th>DETALLES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,7 +136,15 @@ const TablaDefinitiva = () => {
                                 <td className={styles.centerText}>{item.COD_CLIENTE}</td>
                                 <td className={styles.centerText}>{item.RAZON_SOCIAL}</td>
                                 <td className={styles.centerText}>{item.TELEFONO}</td>
-
+                                <td className='detalle'>
+                                    <a
+                                        onClick={() => handleClick(item.FECHA_EMISION, item.N_COMP, item.COD_CLIENTE, item.RAZON_SOCIAL, item.TELEFONO, item.IMPORTE_VTO)}
+                                        to="/proofOfPaymentTango"
+                                        className="link-button-detail"
+                                    >
+                                        <img src={lupa} className='img-lupa' alt="Detalle" />
+                                    </a>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

@@ -7,14 +7,13 @@ export const setTangoData = (data) => ({
     payload: data,
 });
 
-export const getDetail = (date, nOrden, customerID, firstName, lastName, telephoneNumber, paidTotal) => ({
+export const getDetail = (date, nComp, customerID, razonSocial,telephoneNumber, paidTotal) => ({
     type: GET_DETAILS,
-    payload: {
+    payload: {  
         date: date,
-        nOrden: nOrden,
+        nComp: nComp,
         customerID: customerID,
-        firstName: firstName,
-        lastName: lastName,
+        razonSocial: razonSocial,
         telephoneNumber: telephoneNumber,
         paidTotal: paidTotal,
     },

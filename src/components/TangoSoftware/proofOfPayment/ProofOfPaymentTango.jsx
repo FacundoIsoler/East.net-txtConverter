@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import s from './ProofOfPaymentTango.module.css';
 import logo from '../../../assets/Logo_files/Logo.png';
-import saveTextFile from '../../../file/File.js';
 
 function I2of5(DataToEncode) {
     let DataToPrint = "";
@@ -47,10 +46,10 @@ const ProofOfPaymentTango = () => {
     const navigate = useNavigate();
 
     const handleNavigateToTango = () => {
-        navigate('/tableTango');
+        navigate('/TablaDefinitiva');
     };
 
-    const formattedDate = proofOfPaymentData.date.replace(/-/g, '');
+    const formattedDate = proofOfPaymentData.date.replace(/[-/]/g, '');
     const dateYear = formattedDate.slice(2, 4);
     const dateMonth = formattedDate.slice(4, 6);
     const dateDay = formattedDate.slice(6, 8);
@@ -81,10 +80,20 @@ const ProofOfPaymentTango = () => {
         return formattedResult;
     };
 
-    const barcodeData = `04472${proofOfPaymentData.nOrden.padStart(8, "0")}${barCodeDate}${String(proofOfPaymentData.paidTotal).padStart(7, "0")}0000000000000000001234567890`;
+    const barcodeData = `04472${proofOfPaymentData.nComp.padStart(8, "0")}${barCodeDate}${String(proofOfPaymentData.paidTotal).padStart(7, "0")}0000000000000000001234567890`;
 
     const barcodeWithCheckDigits = calculateCheckDigits(barcodeData);
 
+    const saveTextFile = () => {
+        console.log(proofOfPaymentData);
+        const content = `${proofOfPaymentData.date} ${proofOfPaymentData.nComp} ${proofOfPaymentData.customerID} ${proofOfPaymentData.razonSocial} ${proofOfPaymentData.telephoneNumber} ${proofOfPaymentData.paidTotal}`;
+        const fileName = `${proofOfPaymentData.customerID}.${proofOfPaymentData.date}.txt`;
+        const blob = new Blob([content], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+    };
 
     return (
         <div className={s.body}>
@@ -114,12 +123,12 @@ const ProofOfPaymentTango = () => {
                                     </td>
                                 </tr>
                                 <tr className={s.even}>
-                                    <td>Cliente:</td> <td colspan="2">{proofOfPaymentData.firstName} {proofOfPaymentData.lastName}</td> <td>CUIL:</td><td colspan="2">94-66666666</td>
+                                    <td>Cliente:</td> <td colspan="2">{proofOfPaymentData.razonSocial}</td> <td>CUIL:</td><td colspan="2">94-66666666</td>
                                 </tr>
                                 <tr className={s.even}>
-                                    <td>Dirección:</td> <td> Paraná 416, Mza</td> <td>Id:</td>
+                                    <td>Id:</td>
                                     <td> {proofOfPaymentData.customerID} </td>
-                                    <td>Teléfono:</td> <td> {proofOfPaymentData.telephoneNumber}</td>
+                                    <td>Teléfono:</td> <td colspan="2"> {proofOfPaymentData.telephoneNumber === " " ? proofOfPaymentData.telephoneNumber : "NO HAY NUMERO"}</td>
                                 </tr>
                             </table>
                         </div>
@@ -158,7 +167,7 @@ const ProofOfPaymentTango = () => {
                     <button onClick={handleNavigateToTango}>Volver</button>
                 </div>
                 <div className={s.downloadButton}>
-                    <button href='#' id="descargar" onClick={() => saveTextFile([proofOfPaymentData.date + proofOfPaymentData.nOrden + proofOfPaymentData.customerID + proofOfPaymentData.firstName + proofOfPaymentData.lastName + proofOfPaymentData.telephoneNumber + proofOfPaymentData.paidTotal], "archivo.txt")}>Descargar TXT</button>
+                    <button href='#' id="descargar" onClick={saveTextFile}>Descargar TXT</button>
                 </div>
                 <div className={s.barCode} >
                     {I2of5(barcodeWithCheckDigits)}
