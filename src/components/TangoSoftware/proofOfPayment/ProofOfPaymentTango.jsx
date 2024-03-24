@@ -49,11 +49,12 @@ const ProofOfPaymentTango = () => {
         navigate('/TablaDefinitiva');
     };
 
-    const formattedDate = proofOfPaymentData.date.replace(/[-/]/g, '');
-    const dateYear = formattedDate.slice(2, 4);
-    const dateMonth = formattedDate.slice(4, 6);
-    const dateDay = formattedDate.slice(6, 8);
-    const barCodeDate = Number([dateYear, dateMonth, dateDay].join(""));
+    // const formattedDate = proofOfPaymentData ? proofOfPaymentData.date.replace(/[-/]/g, '') : '';
+    // const dateYear = formattedDate.slice(2, 4);
+    // const dateMonth = formattedDate.slice(4, 6);
+    // const dateDay = formattedDate.slice(6, 8);
+    // const barCodeDate = Number([dateYear, dateMonth, dateDay].join(""));
+    const barCodeDate = proofOfPaymentData.date;
 
     const calculateCheckDigits = (data) => {
         const cleanedData = data.replace(/\s/g, '');
@@ -80,14 +81,14 @@ const ProofOfPaymentTango = () => {
         return formattedResult;
     };
 
-    const barcodeData = `04472${proofOfPaymentData.nComp.padStart(8, "0")}${barCodeDate}${String(proofOfPaymentData.paidTotal).padStart(7, "0")}0000000000000000001234567890`;
+    const barcodeData = `04472${proofOfPaymentData && proofOfPaymentData.nComp ? proofOfPaymentData.nComp.padStart(8, "0") : ''}${barCodeDate}${String(proofOfPaymentData && proofOfPaymentData.paidTotal).padStart(7, "0")}0000000000000000001234567890`;
+
 
     const barcodeWithCheckDigits = calculateCheckDigits(barcodeData);
 
     const saveTextFile = () => {
-        console.log(proofOfPaymentData);
-        const content = `${proofOfPaymentData.date} ${proofOfPaymentData.nComp} ${proofOfPaymentData.customerID} ${proofOfPaymentData.razonSocial} ${proofOfPaymentData.telephoneNumber} ${proofOfPaymentData.paidTotal}`;
-        const fileName = `${proofOfPaymentData.customerID}.${proofOfPaymentData.date}.txt`;
+        const content = `${proofOfPaymentData.date} ${proofOfPaymentData.Nro_comprobante} ${proofOfPaymentData.Cod_cliente} ${proofOfPaymentData.Razon_social} ${proofOfPaymentData.TELEFONO} ${proofOfPaymentData.IMPORTE_VT}`;
+        const fileName = `${proofOfPaymentData.Cod_cliente}.${proofOfPaymentData.date}.txt`;
         const blob = new Blob([content], { type: 'text/plain' });
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -98,21 +99,26 @@ const ProofOfPaymentTango = () => {
     return (
         <div className={s.body}>
             <fieldset style={{ width: "43rem", height: "75rem", padding: "0rem 1rem" }}>
+                {console.log(proofOfPaymentData)
+                }
                 <div className={s.header}>
                     <div className={s.logo}>
                         <img src={logo} alt='logo'></img>
                         <div>{proofOfPaymentData.date}</div>
                     </div>
-                    <div className={s.nOrden}>{proofOfPaymentData.nOrden}</div>
-                    <div className={s.company}>
+                    <div className={s.nOrden}>
+                        <div>{proofOfPaymentData.Tipo_comprobante}</div>
+                        {proofOfPaymentData.Nro_comprobante}</div>
+                    
+                </div>
+                <div className={s.company}>
                         <h3>East.net <br />
-                            CUIT: XX-XXXXXXX-X<br />
+                            CUIT: {proofOfPaymentData.CUIT}<br />
                             Email: XXXXXXXXXXXXX<br />
                             Phone: XXXXXXXXXXX<br />
                             Address: XXXXXXXXXXX<br />
                         </h3>
                     </div>
-                </div>
                 <div className={s.container}>
                     <fieldset className={s.fieldsetContainer}>
                         <div className={s.client}>
@@ -123,17 +129,17 @@ const ProofOfPaymentTango = () => {
                                     </td>
                                 </tr>
                                 <tr className={s.even}>
-                                    <td>Cliente:</td> <td colspan="2">{proofOfPaymentData.razonSocial}</td> <td>CUIL:</td><td colspan="2">94-66666666</td>
+                                    <td>Cliente:</td> <td colspan="2">{proofOfPaymentData.Razon_social}</td> <td>CUIL:</td><td colspan="2"> {proofOfPaymentData.CUIT}</td>
                                 </tr>
                                 <tr className={s.even}>
                                     <td>Id:</td>
-                                    <td> {proofOfPaymentData.customerID} </td>
-                                    <td>Teléfono:</td> <td colspan="2"> {proofOfPaymentData.telephoneNumber === " " ? proofOfPaymentData.telephoneNumber : "NO HAY NUMERO"}</td>
+                                    <td> {proofOfPaymentData.Cod_cliente} </td>
+                                    <td>Teléfono:</td> <td colspan="2"> {proofOfPaymentData.TELEFONO === " " ? proofOfPaymentData.TELEFONO : "NO HAY NUMERO"}</td>
                                 </tr>
                             </table>
                         </div>
                     </fieldset>
-                    <fieldset className={s.fieldsetContainer2}>
+                    <fieldset className={s.fieldsetContainer2} >
                         <div className={s.details}>
                             <table style={{ minWidth: "41.50rem", margin: ".1875rem" }}>
                                 <tr className={s.odd}>
@@ -145,7 +151,7 @@ const ProofOfPaymentTango = () => {
                                     <td>Producto</td> <td>Cantidad</td> <td>Precio</td> <td>Subtotal</td>
                                 </tr>
                                 <tr className={s.even}>
-                                    <td>xxxxx</td> <td>xx</td> <td>$xxxx</td> <td>Pr x c</td>
+                                    <td>{proofOfPaymentData.Descripcion}</td> <td>xx</td> <td>${proofOfPaymentData.IMPORTE_VT}</td> <td>Pr x c</td>
                                 </tr>
                                 <tr className={s.even}>
                                     <td>xxxxx</td> <td>xx</td> <td>$xxxx</td> <td>Pr x c</td>
@@ -155,14 +161,14 @@ const ProofOfPaymentTango = () => {
                                         <h3 align="center">Total</h3>
                                     </td>
                                     <td colspan="3" className={s.total}>
-                                        <h3>${proofOfPaymentData.paidTotal}</h3>
+                                        <h3>${proofOfPaymentData.IMPORTE_VT}</h3>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </fieldset>
                 </div>
-                <div className={s.state}>Pago / Impago</div>
+                <div className={s.state}>{proofOfPaymentData.ESTADO_VTO === "PEN" ? "Impago" : "Pagado"}</div>
                 <div className={s.backButton}>
                     <button onClick={handleNavigateToTango}>Volver</button>
                 </div>
@@ -179,3 +185,4 @@ const ProofOfPaymentTango = () => {
 }
 
 export default ProofOfPaymentTango;
+

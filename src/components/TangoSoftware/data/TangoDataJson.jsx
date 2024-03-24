@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const TangoDataJson = () => {
     const location = useLocation();
     const jsonOutput1 = JSON.parse(location.state.jsonOutput1);
-    const jsonOutput2 = JSON.parse(location.state.jsonOutput2);
     const navigate = useNavigate();
+
 
     const modifyDecimals = (value, key) => {
         const numericValue = parseFloat(value);
@@ -46,7 +46,7 @@ const TangoDataJson = () => {
     };
 
     const handleGoToTablaDefinitiva = () => {
-        navigate('/TablaDefinitiva', { state: { jsonOutput1, jsonOutput2 } });
+        navigate('/TablaDefinitiva', { state: { jsonOutput1 } });
     };
 
     return (
@@ -54,8 +54,6 @@ const TangoDataJson = () => {
             <button onClick={handleGoToTablaDefinitiva}>Ir a Tabla Definitiva</button>
             <h2>Tango_facturas</h2>
             {renderTable(jsonOutput1)}
-            <h2>Detalles_facturas</h2>
-            {renderTable(jsonOutput2)}            
         </div>
     );
 };

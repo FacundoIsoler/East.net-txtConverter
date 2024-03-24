@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TablaDefinitiva.module.css';
-import { useLocation, useNavigate } from 'react-router-dom';
 import lupa from '../../../assets/Logo_files/lupa.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getDetail } from '../../../actions/actions.js';
 
@@ -9,95 +9,65 @@ const TablaDefinitiva = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { jsonOutput1, jsonOutput2 } = location.state || {};
+    const { jsonOutput1 } = location.state || {};
 
-    const renameKeys = (obj, keyMap) => {
-        return Object.keys(obj).reduce((acc, key) => {
-            const newKey = keyMap[key] || key;
-            return { ...acc, [newKey]: obj[key] };
-        }, {});
+
+    const formatDate = (dateStr) => {
+        if (!dateStr || typeof dateStr !== 'string' || dateStr.length < 10) {
+            return "{ year: '', month: '', day: '' }"; // Devuelve valores predeterminados si la cadena es inválida
+        }
+
+        const year = dateStr.substring(0, 4);
+        const month = dateStr.substring(5, 7);
+        const day = dateStr.substring(8, 10);
+
+        const date = day + "-" + month + "-" + year;
+        return date;
     };
 
-    // Mapeo de nombres de claves para jsonOutput1
-    const keyMapJsonOutput1 = {
-        "FECHA_VTO": "FECHA_VTO",
-        "N_COMP": "N_COMP",
-        "T_COMP": "T_COMP",
-        // Agrega más mapeos aquí según sea necesario
-    };
-
-    // Mapeo de nombres de claves para jsonOutput2
-    const keyMapJsonOutput2 = {
-        "Nro. comprobante": "N_COMP",
-        "Raz�n social": "RAZON_SOCIAL",
-        "Tipo comprobante": "T_COMP",
-        "C�d. cliente": "COD_CLIENTE",
-        "Tel�fono\r": "TEL",
-        "Fecha de emisi�n": "FECHA_EMISION",
-        // Agrega más mapeos aquí según sea necesario
-    };
-
-    // Convertir los nombres de las claves en jsonOutput1 y jsonOutput2
-    const jsonOutput1WithRenamedKeys = jsonOutput1.map(item => renameKeys(item, keyMapJsonOutput1));
-    const jsonOutput2WithRenamedKeys = jsonOutput2.map(item => renameKeys(item, keyMapJsonOutput2));
-
-    const dateFormat = (date) => {
-        const fechaEmision = new Date(date);
-        // Formatear la fecha como DDMMYYYY
-        const day = fechaEmision.getUTCDate();
-        const month = fechaEmision.getUTCMonth() + 1;
-        const year = fechaEmision.getUTCFullYear();
-        const fechaDefinitiva = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`;
-        return fechaDefinitiva;
-    };
-
-    const fechaEmision = (date) => {
-        // Fecha de emisión en formato de cadena (MM/DD/YYYY)
-        const fechaEmisionStr = date;
-        // Dividir la cadena en componentes de fecha
-        const parts = fechaEmisionStr.split('/');
-        const month = parseInt(parts[1], 10); // Mes (0-11)
-        const day = parseInt(parts[0], 10);   // Día
-        const year = parseInt(parts[2], 10);  // Año
-        // Crear un objeto de fecha
-        const fechaEmisionDate = new Date(year, month - 1, day); // Restar 1 al mes porque en Date el mes es 0-11
-        return fechaEmisionDate;
-    };
-
-    const mergeData = (jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys) => {
-        const mergedData = [];
-
-        jsonOutput1WithRenamedKeys.forEach(obj1 => {
-            jsonOutput2WithRenamedKeys.forEach(obj2 => {
-                if (obj1.N_COMP === obj2.N_COMP && obj1.T_COMP === obj2.T_COMP) {
-                    mergedData.push({
-                        N_COMP: obj1.N_COMP,
-                        T_COMP: obj1.T_COMP,
-                        FECHA_EMISION: dateFormat(fechaEmision(obj2.FECHA_EMISION)),
-                        FECHA_VTO: dateFormat(obj1.FECHA_VTO),
-                        IMPORTE_VTO: parseInt(obj1.IMPORTE_VT),
-                        ALTERNATIVA_1: dateFormat(obj1.ALTERNATIVA_1),
-                        IMPORTE_TOTAL_1: parseInt(obj1.IMPORTE_TOTAL_1),
-                        ALTERNATIVA_2: dateFormat(obj1.ALTERNATIVA_2),
-                        IMPORTE_TOTAL_2: parseInt(obj1.IMPORTE_TOTAL_2),
-                        COD_CLIENTE: obj2.COD_CLIENTE,
-                        RAZON_SOCIAL: obj2.RAZON_SOCIAL,
-                        TELEFONO: obj2.TEL,
-                    });
-                }
-            });
-        });
-
-        return mergedData;
-    };
-
-    // Combinar los datos de jsonOutput1WithRenamedKeys y jsonOutput2WithRenamedKeys
-    const mergedData = mergeData(jsonOutput1WithRenamedKeys, jsonOutput2WithRenamedKeys);
-
-    const handleClick = (date, nComp, customerID, razonSocial, telephoneNumber, paidTotal) => {
-        dispatch(getDetail(date, nComp, customerID, razonSocial, telephoneNumber, paidTotal));
+    const handleClick = (
+        vto,
+        emision,
+        nroComprobante,
+        codCliente,
+        razonSocial,
+        telefono,
+        importeVT,
+        importeTotal1,
+        importeTotal2,
+        cuit,
+        tipoComprobante,
+        descripcion,
+        periodoDesde,
+        periodoHasta,
+        estadoVto,
+        fechaVto,
+        fechaVto1,
+        fechaVto2
+    ) => {
+        dispatch(getDetail(
+            vto,
+            emision,
+            nroComprobante,
+            codCliente,
+            razonSocial,
+            telefono,
+            importeVT,
+            importeTotal1,
+            importeTotal2,
+            cuit,
+            tipoComprobante,
+            descripcion,
+            periodoDesde,
+            periodoHasta,
+            estadoVto,
+            fechaVto,
+            fechaVto1,
+            fechaVto2
+        ));
         navigate('/proofOfPaymentTango');
     };
+    
 
     return (
         <div className={styles.container}>
@@ -106,44 +76,82 @@ const TablaDefinitiva = () => {
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                            <th>N_comp</th>
-                            <th>T_comp</th>
-                            <th>FECHA_EMISION</th>
+                            <th>Nro_comprobante</th>
+                            <th>Tipo_comprobante</th>
                             <th>FECHA_VTO</th>
-                            <th>IMPORTE</th>
-                            <th>FECHA_1</th>
-                            <th>IMPORTE_1</th>
-                            <th>FECHA_2</th>
-                            <th>IMPORTE_2</th>
-                            <th>COD_CLIENTE</th>
-                            <th>RAZON_SOCIAL</th>
-                            <th>TELEFONO</th>
+                            <th>ID_GVA12</th>
+                            <th>ID_STA11</th>
+                            <th>Fecha_de_emision</th>
+                            <th>Cod_cliente</th>
+                            <th>Razon_social</th>
+                            <th>ID_GVA14</th>
+                            <th>CUIT</th>
+                            <th>Cod_articulo</th>
+                            <th>Descripcion</th>
+                            <th>Periodo_desde</th>
+                            <th>Periodo_hasta</th>
+                            <th>ID_GVA46</th>
+                            <th>ESTADO_VTO</th>
+                            <th>FECHA_VTO</th>
+                            <th>IMPORTE_VT</th>
+                            <th>FECHA_VTO1</th>
+                            <th>IMPORTE_TOTAL_1</th>
+                            <th>FECHA_VTO2</th>
+                            <th>IMPORTE_TOTAL_2</th>
                             <th>DETALLES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {mergedData.map((item, index) => (
+                        {jsonOutput1.map((item, index) => (
                             <tr key={index}>
-                                <td className={styles.centerText}>{item.N_COMP}</td>
-                                <td className={styles.centerText}>{item.T_COMP}</td>
-                                <td className={styles.centerText}>{item.FECHA_EMISION}</td>
-                                <td className={styles.centerText}>{item.FECHA_VTO}</td>
-                                <td className={`${styles.importe} ${styles.alignRight}`}>{item.IMPORTE_VTO}</td>
-                                <td className={styles.centerText}>{item.ALTERNATIVA_1}</td>
-                                <td className={`${styles.importe} ${styles.alignRight}`}>{item.IMPORTE_TOTAL_1}</td>
-                                <td className={styles.centerText}>{item.ALTERNATIVA_2}</td>
-                                <td className={`${styles.importe} ${styles.alignRight}`}>{item.IMPORTE_TOTAL_2}</td>
-                                <td className={styles.centerText}>{item.COD_CLIENTE}</td>
-                                <td className={styles.centerText}>{item.RAZON_SOCIAL}</td>
-                                <td className={styles.centerText}>{item.TELEFONO}</td>
-                                <td className='detalle'>
-                                    <a
-                                        onClick={() => handleClick(item.FECHA_EMISION, item.N_COMP, item.COD_CLIENTE, item.RAZON_SOCIAL, item.TELEFONO, item.IMPORTE_VTO)}
-                                        to="/proofOfPaymentTango"
+                                <td>{item.Nro_comprobante}</td>
+                                <td>{item.Tipo_comprobante}</td>
+                                <td>{formatDate(item.FECHA_VTO)}</td>
+                                <td>{item.ID_GVA12}</td>
+                                <td>{item.ID_STA11}</td>
+                                <td>{formatDate(item.Fecha_de_emision)}</td>
+                                <td>{item.Cod_cliente}</td>
+                                <td>{item.Razon_social}</td>
+                                <td>{item.ID_GVA14}</td>
+                                <td>{item.CUIT}</td>
+                                <td>{item.Cod_articulo}</td>
+                                <td>{item.Descripcion}</td>
+                                <td>{formatDate(item.Periodo_desde)}</td>
+                                <td>{formatDate(item.Periodo_hasta)}</td>
+                                <td>{item.ID_GVA46}</td>
+                                <td>{item.ESTADO_VTO}</td>
+                                <td>{formatDate(item.FECHA_VTO)}</td>
+                                <td>{item.IMPORTE_VT}</td>
+                                <td>{formatDate(item.FECHA_VTO1)}</td>
+                                <td>{item.IMPORTE_TOTAL_1}</td>
+                                <td>{formatDate(item.FECHA_VTO2)}</td>
+                                <td>{item.IMPORTE_TOTAL_2}</td>
+                                <td>
+                                    <button
+                                        onClick={() => handleClick(
+                                            item.FECHA_VTO,
+                                            item.Fecha_de_emision,
+                                            item.Nro_comprobante,
+                                            item.Cod_cliente,
+                                            item.Razon_social,
+                                            item.TELEFONO,
+                                            item.IMPORTE_VT,
+                                            item.IMPORTE_TOTAL_1,
+                                            item.IMPORTE_TOTAL_2,
+                                            item.CUIT,
+                                            item.Tipo_comprobante,
+                                            item.Descripcion,
+                                            item.Periodo_desde,
+                                            item.Periodo_hasta,
+                                            item.ESTADO_VTO,
+                                            item.FECHA_VTO,
+                                            item.FECHA_VTO1,
+                                            item.FECHA_VTO2
+                                        )}
                                         className="link-button-detail"
                                     >
-                                        <img src={lupa} className='img-lupa' alt="Detalle" />
-                                    </a>
+                                        <img src={lupa} alt="Detalle" />
+                                    </button>
                                 </td>
                             </tr>
                         ))}
